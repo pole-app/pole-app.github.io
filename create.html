@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pole - Create a Pole</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+    <script src="/static/js/modernizr.custom.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+  </head>
+
+  <body>
+
+	<!-- Menu -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<h1 class="logo"><a href="index.html#home">SWISSCO</a></h1>
+			<i class="fa fa-arrow-right menu-close"></i>
+			<a href="index.html">Home</a>
+			<a href="services.html">Services</a>
+			<a href="about.html">About</a>
+			<a href="#contact">Contact</a>
+		</div>
+
+		<!-- Menu button -->
+	</nav>
+
+	<!-- MAIN IMAGE SECTION -->
+	<div id="serviceswrap" style="position:relative">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 col-lg-offset-2">
+					<h2>Create a survey, push it immediately. 
+					</h2>
+				</div>
+			</div><!-- row -->
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+
+	<!-- PROCESS SECTION -->
+    <div class="container" id="request" style="position: relative">
+      <div class="row mt">
+		  <div class="col-lg-8">
+		  	<h1>Create a survey</h1>
+		  	<hr>
+		  	<h3><b>HOW IT WORKS</b></h3>
+		  	<p>All you need to do is link a Google Forms survey below, and specify the filters you'd like to place on your respondents. Select a target number of responses, and we'll take care of th rest. We'll contact you once your results are ready. </p>
+			<form id="signer">
+			  <div class="form-group">
+			    <label>Google Forms URL</label>
+			    <input type="text" name="username" class="form-control" placeholder="Copy and paste here">
+			  </div>
+			  <div class="form-group">
+			    <label>Email</label>
+			    <input type="text" name="email" class="form-control" placeholder="We'll send the responses we gather to this address">
+			  </div>
+			  <div class="form-group">
+			    <label>Target number of responses</label>
+			    <input type="text" name="signature" class="form-control" placeholder="We'll try to gather at least this many">
+			  </div>
+			  <div class="form-group">
+			    <label>Filters &nbsp;</label>
+				<select name="carlist" form="carform">
+				  <option value="volvo">Real-time location</option>
+				  <option value="saab">Gender</option>
+				  <option value="opel">Income level</option>
+				  <option value="audi">Age</option>
+				</select>
+			  </div>
+
+			  <button type="submit" class="btn btn-default">Submit</button>
+		  </div><!-- col-lg-8 -->
+		  <div class="col-lg-offset-1 col-lg-2">
+		  	<div id="form-result" style="overflow: visible"></div>
+		  </div>
+      </div><!-- /row -->
+      <br><br>
+    </div><!-- /.container -->
+  </body>
+</html>
