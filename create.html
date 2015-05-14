@@ -19,8 +19,75 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
     <script src="/static/js/modernizr.custom.js"></script>
     <script src="/static/js/jquery.min.js"></script>
+  	<link href="/static/css/vex.css" rel="stylesheet">
+ 	 <link href="/static/css/vex-theme-plain.css" rel="stylesheet">
+ 	 
+
+    <!-- Javascript Resources -->
+	<script src="/static/js/vex.combined.min.js"></script>
+	<script>vex.defaultOptions.className = 'vex-theme-plain';</script>
+	<script src="/static/js/filters.js"></script>
+    <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+    <script>
+    Parse.initialize("ZUqzM5T4x8on1JJkQnqYEezBU9ZnNKr45osVM3Q8", "CmMdZxIgaZtzGPRTqZjz51KVyVtbgrt3mL4egdbP");
+
+    function sendPoll() {
+		var Poll = Parse.Object.extend("Poll");
+		var newPoll = new Poll();
+		//newPoll.set("createdByOrganization", "3Nc9ry0OYu");
+		newPoll.set("subject", "Topic:")
+		newPoll.set("organization", $('#orgemail').val());
+		newPoll.set("googleFormLink", $('#googleurl').val());
+		newPoll.set("totalAllowedRespondents", parseInt($('#numResponses').val()));
+
+		if ($("#filter_age").prop("checked")) {
+			newPoll.set("filterByAge", $("#age-min").val() + "-" + $("#age-max").val());
+		} else {
+			newPoll.set("filterByAge", "-");
+		}
+
+		if ($("#filter_income").prop("checked")) {
+			newPoll.set("filterByIncome", $("#income-min").val() + "-" + $("#income-max").val());
+		} else {
+			newPoll.set("filterByIncome", "-");
+		}
+
+		if ($("#filter_gender").prop("checked")) {
+			newPoll.set("filterByGender", "male");
+		} else {
+			newPoll.set("filterByGender", "-");
+		}
+
+		newPoll.set("filterByOccupation", "-");
+		newPoll.set("filterByRace", "-");
+		newPoll.set("filterByEducation", "-");
+
+		var geop = new Parse.GeoPoint({latitude: 40.34573263958129, longitude: -74.66072542599836});
+		newPoll.set("epicenter",geop);
+
+		// newPoll.set("filterByIncome", );
+		// newPoll.set("filterByGender", );
+		// newPoll.set("filterByLocation", );s
+		// newPoll.set("epicenterLatitude", );
+		// newPoll.set("epicenterLongitutde", );
+
+		newPoll.set("subject", "test subject");
+		newPoll.set("rewardAmount", 1.00);
+		newPoll.set("isOpen", true);
+		newPoll.save();
+    }
+
+		$('#submitButton').on('click', function(e) {
+	    	e.preventDefault();
+	    	sendPoll();
+	    	alert("Thanks for your submission!");
+	    });
+
+    </script>
   </head>
 
+  <!-- Javascript resources -->
+  <script src="//www.parsecdn.com/js/parse-1.4.2.min.js"></script>
   <body onload="clearAll()">
 
 	<!-- Menu -->
@@ -54,28 +121,29 @@
     <div class="container" id="request" style="position: relative">
       <div class="row mt">
 		  <div class="col-lg-8">
-		  	<h1>Create a survey</h1>
+		  	<h1>Create a survey with Poll</h1>
 		  	<hr>
 		  	<h3><b>HOW IT WORKS</b></h3>
 		  	<p>All you need to do is link a Google Forms survey below, and specify the filters you'd like to place on your respondents. Select a target number of responses, and we'll take care of the rest. We'll contact you once your results are ready. </p>
 			<form id="signer">
 			  <div class="form-group">
 			    <label>Google Forms URL</label>
-			    <input type="text" name="username" class="form-control" placeholder="Copy and paste here">
+			    <input type="text" id="googleurl" name="username" class="form-control" placeholder="Copy and paste here">
 			  </div>
 			  <div class="form-group">
-			    <label>Email</label>
-			    <input type="text" name="email" class="form-control" placeholder="We'll send the responses we gather to this address">
+			    <label>Organization</label>
+			    <input type="text" id="orgemail" name="email" class="form-control" placeholder="This will be shown to Pole users">
 			  </div>
 			  <div class="form-group">
 			    <label>Target number of responses</label>
-			    <input type="text" name="signature" class="form-control" placeholder="We'll try to gather at least this many">
+			    <input type="text" id="numResponses" name="signature" class="form-control" placeholder="We'll try to gather at least this many">
 			  </div>
 
 
 			  <div class="form-group">
 			    <label>Filters &nbsp;</label>
 				<select id="myselect">
+				  <option value="gender">-</option>
 				  <option value="location" id="location">Real-time location</option>
 				  <option value="gender" id="gender">Gender</option>
 				  <option value="income" id="income">Income level</option>
@@ -105,48 +173,62 @@
 
 			  <!-- Location form group -->
 			  <div class="form-group formbox" id="location-box">
+			  	<hr>
 			    <label>Location:</label><br>
-			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <input type="checkbox" name="vehicle" id="filter_location" value="Bike"> Filter by this criteria<br><br>
 			    <label>Epicenter</label>
 			    <input type="text" name="signature" class="form-control" placeholder="Enter coordinates"><br>
 			    <label>Range</label>
 			    <input type="text" name="signature" class="form-control" placeholder="We'll match the epicenter coordinates out to this many miles">
+			    <hr>
 			  </div>
 
 			  <!-- Gender form group -->
 			  <div class="form-group formbox" id="gender-box">
+			  	<hr>
 			    <label>Gender:</label><br>
-			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <input type="checkbox" name="vehicle" id="filter_gender" value="Bike"> Filter by this criteria<br><br>
 			    <label>Options</label><br>
 			    <input type="checkbox" name="vehicle" value="Bike"> Male<br><br>
 			    <input type="checkbox" name="vehicle" value="Bike"> Female<br><br>
 			    <input type="checkbox" name="vehicle" value="Bike"> Transgender<br><br>
 			    <input type="checkbox" name="vehicle" value="Bike"> Genderqueer/Androgynous<br><br>
+			    <hr>
 			  </div>
 
 			  <!-- Income form group -->
 			  <div class="form-group formbox" id="income-box">
+			  	<hr>
 			    <label>Income:</label><br>
-			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <input type="checkbox" name="vehicle" id="filter_income" value="Bike"> Filter by this criteria<br><br>
 			    <label>Minimum</label>
 			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no minimum"><br>
 			    <label>Maximum</label>
 			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no maximum"><br>
+				<hr>
 			  </div>
 
 			  <!-- Age form group -->
 			  <div class="form-group formbox" id="age-box">
+			  	<hr>
 			    <label>Age:</label><br>
-			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <input type="checkbox" name="vehicle" id="filter_age" value="Bike"> Filter by this criteria<br><br>
 			    <label>Minimum</label>
-			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no minimum"><br>
+			    <input type="text" id="age-min" name="signature" class="form-control" placeholder="Enter XXX for no minimum"><br>
 			    <label>Maximum</label>
-			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no maximum"><br>
+			    <input type="text" id="age-max" name="signature" class="form-control" placeholder="Enter XXX for no maximum"><br>
+			    <hr>
+			  </div>
+			  <br>
+			  <div>
+			  <label>Price estimate:</label><br> 
+			  <div id="estimate">Price Estimate</div>
 			  </div>
 
-			  <br>
+			  <br></form>
+			  <button id="submitButton" class="btn btn-default">Submit</button>
 
-			  <button type="submit" class="btn btn-default">Submit</button>
+
 		  </div><!-- col-lg-8 -->
 		  <div class="col-lg-offset-1 col-lg-2">
 		  	<div id="form-result" style="overflow: visible"></div>
@@ -155,4 +237,5 @@
       <br><br>
     </div><!-- /.container -->
   </body>
+  <script>$('.form-group').change(function() {updatePrice();});</script>
 </html>
