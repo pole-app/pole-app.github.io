@@ -21,7 +21,7 @@
     <script src="/static/js/jquery.min.js"></script>
   </head>
 
-  <body>
+  <body onload="clearAll()">
 
 	<!-- Menu -->
 	<nav class="menu" id="theMenu">
@@ -57,7 +57,7 @@
 		  	<h1>Create a survey</h1>
 		  	<hr>
 		  	<h3><b>HOW IT WORKS</b></h3>
-		  	<p>All you need to do is link a Google Forms survey below, and specify the filters you'd like to place on your respondents. Select a target number of responses, and we'll take care of th rest. We'll contact you once your results are ready. </p>
+		  	<p>All you need to do is link a Google Forms survey below, and specify the filters you'd like to place on your respondents. Select a target number of responses, and we'll take care of the rest. We'll contact you once your results are ready. </p>
 			<form id="signer">
 			  <div class="form-group">
 			    <label>Google Forms URL</label>
@@ -71,15 +71,80 @@
 			    <label>Target number of responses</label>
 			    <input type="text" name="signature" class="form-control" placeholder="We'll try to gather at least this many">
 			  </div>
+
+
 			  <div class="form-group">
 			    <label>Filters &nbsp;</label>
-				<select name="carlist" form="carform">
-				  <option value="volvo">Real-time location</option>
-				  <option value="saab">Gender</option>
-				  <option value="opel">Income level</option>
-				  <option value="audi">Age</option>
+				<select id="myselect">
+				  <option value="location" id="location">Real-time location</option>
+				  <option value="gender" id="gender">Gender</option>
+				  <option value="income" id="income">Income level</option>
+				  <option value="age" id="age">Age</option>
 				</select>
 			  </div>
+
+			  <script>
+			  function openSelected() {
+			  	 console.log("BUMP");
+			     slct = $( "#myselect option:selected" );
+			   	 toopen = slct.attr('id') + "-box";
+			   	 $('.formbox').css("display", "none");
+			   	 $('#' + toopen).css("display", "initial");
+			  }
+
+			  $("#myselect").on('change', function() {
+  					openSelected(); // or $(this).val()
+			  });
+
+
+			  function clearAll() {
+			  	$(".formbox").css("display", "none");
+			  }
+
+			  </script>
+
+			  <!-- Location form group -->
+			  <div class="form-group formbox" id="location-box">
+			    <label>Location:</label><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <label>Epicenter</label>
+			    <input type="text" name="signature" class="form-control" placeholder="Enter coordinates"><br>
+			    <label>Range</label>
+			    <input type="text" name="signature" class="form-control" placeholder="We'll match the epicenter coordinates out to this many miles">
+			  </div>
+
+			  <!-- Gender form group -->
+			  <div class="form-group formbox" id="gender-box">
+			    <label>Gender:</label><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <label>Options</label><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Male<br><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Female<br><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Transgender<br><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Genderqueer/Androgynous<br><br>
+			  </div>
+
+			  <!-- Income form group -->
+			  <div class="form-group formbox" id="income-box">
+			    <label>Income:</label><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <label>Minimum</label>
+			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no minimum"><br>
+			    <label>Maximum</label>
+			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no maximum"><br>
+			  </div>
+
+			  <!-- Age form group -->
+			  <div class="form-group formbox" id="age-box">
+			    <label>Age:</label><br>
+			    <input type="checkbox" name="vehicle" value="Bike"> Filter by this criteria<br><br>
+			    <label>Minimum</label>
+			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no minimum"><br>
+			    <label>Maximum</label>
+			    <input type="text" name="signature" class="form-control" placeholder="Enter XXX for no maximum"><br>
+			  </div>
+
+			  <br>
 
 			  <button type="submit" class="btn btn-default">Submit</button>
 		  </div><!-- col-lg-8 -->
