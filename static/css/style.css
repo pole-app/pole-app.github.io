@@ -1,0 +1,82 @@
+.social a {
+    font-weight: 800;
+    margin-right: 20px;
+}
+
+.highlight {
+    color: #03C9A9;
+}
+
+.glow:focus {
+    border-color: #03C9A9;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(241, 196, 16, .6);
+}
+
+/* Task page - hint buttons */
+.help-button {
+    font-size: 2em;
+    cursor: pointer;
+
+    /* Position */
+    position: absolute;
+    right: 10px;
+
+    /* Color */
+    color: white;
+    -webkit-transition: background-color .4s linear, color .4s linear;
+    -moz-transition: background-color .4s linear, color .4s linear;
+    -o-transition: background-color .4s linear, color .4s linear;
+    -ms-transition: background-color .4s linear, color .4s linear;
+    transition: background-color .4s linear, color .4s linear;
+}
+
+.help-button:hover {
+    color: #f1c40f;
+}
+
+.help-button:nth-child(1) {
+    top: 10px;
+}
+
+.help-button:nth-child(2) {
+    top: 45px;
+}
+
+.help-button:nth-child(3) {
+    top: 80px;
+}
+
+.help-button:nth-child(4) {
+    top: 115px;
+}
+
+.help-button:nth-child(5) {
+    top: 150px;
+}
+
+.help-button:nth-child(n) {
+    visibility: hidden;
+    opacity: 0;
+}
+
+/* Task page - terminal styling */
+.cmd {
+    color: yellow;
+}
+
+.terminal-output .terminal-dir {
+    color: rgb(0,245,255);
+}
+
+.terminal-output .terminal-file {
+    color: red;
+}
+
+/* Task page - modal */
+.congratulatory-modal .vex-dialog-button {
+    background-color: #03C9A9 !important;
+}
+
+.congratulatory-modal .vex-content {
+    border: 3px solid #03C9A9 !important;
+}
